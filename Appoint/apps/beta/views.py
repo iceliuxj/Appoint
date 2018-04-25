@@ -24,8 +24,8 @@ def register(request):
             password = bcrypt.hashpw(request.POST['password'].encode(), bcrypt.gensalt()),
             admin = 0)
         request.session['id']=user.id
-        request.session['first_name']=user.first_name
-        return redirect("/homepage")
+        request.session['username']=user.first_name
+        return redirect("/userpage")
 
 def login(request):
     errors = User.objects.login_validator(request.POST)
@@ -34,10 +34,12 @@ def login(request):
             messages.error(request, message, tag)
         return redirect('/')
     else:
-        user = User.objects.get(email = request.POST['login_id'])
-        request.session['id'] = user.id  # Save session ID on successful login, so that we can retrieve when needed # -shawn
-        request.session['first_name']=user.first_name
-        return redirect('/homepage')
+        this_user = User.objects.get(email = request.POST['login_id'])
+        request.session['user_id'] = this_user.id  # Save session ID on successful login, so that we can retrieve when needed # -shawn
+        if this_user.admin == 0:
+            return redirect('/userpage')  
+        else:
+            return redirect('/homepage')
 
 def homepage(request):
     schedules=Schedule.objects.all()
@@ -51,6 +53,15 @@ def homepage(request):
     }
     return render(request,"beta/homepage.html",context)
 
+def userpage(request):
+    schedules = Schedule.objects.all().order_by('start')
+    user = User.objects.get(id = request.session['user_id'])
+    context = {
+        'user': user,
+        'schedules': schedules
+    }
+    return render(request,"beta/userpage.html", context)
+    
 def acceptpopup(request):
     return render(request,"beta/acceptpopup.html")
 

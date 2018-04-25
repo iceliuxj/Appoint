@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<div id = "schedule_wrapper">
+		<table>
+			<tr>
+				<th><h1>Make Appointment</h1></th>
+			</tr>
+			{% for schedule in schedules %}
+				<tr>
+					<td>{{schedule.start}}-{{schedule.end}}</td>
+					<td><button onclick ="">Appoint</button></td>
+				</tr>
+			{% endfor %}
+		</table>
+	</div>
+	<script>
+		function popup(){
+			window.open("/acceptpopup.html", "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=200,left=500,width=400,height=400");
+		}
+	
+	</script>
+</body>
+</html>
