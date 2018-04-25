@@ -12,4 +12,7 @@ urlpatterns =[
     url(r'^rejectpopup.html$', views.rejectpopup),
     url(r'^addschedule.html$', views.addschedule),
     url(r'^homepage/addshedule$', views.addschedules),
+    url(r'^appoint/(?P<id>\d+)$',views.appointmentpage),
+    url(r'^appoint/confirm/(?P<id>\d+)$',views.appoint),
+    url(r'^cancel/(?P<id>\d+)$',views.cancel),
 ]

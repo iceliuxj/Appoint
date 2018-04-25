@@ -1,27 +1,81 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+	<title>UserPage</title>
+	<style>
+		*{
+			text-align: center;
+		}
+		#schedule_wrapper{
+			display: inline-block;
+			border: 1px solid black;
+		}
+		#apppointment_wrapper{
+			display: inline-block;
+			border: 1px solid black;
+		}
+	</style>
 </head>
 <body>
+	<h1>Welcome, {{user.first_name}}</h1>
+	<p>You have {{count}} appoints ahead</p>
 	<div id = "schedule_wrapper">
+		<h1>Make Appointment</h1>
+		<p> Dr.{{doctor.first_name}}'s schedule</p>
 		<table>
 			<tr>
-				<th><h1>Make Appointment</h1></th>
+				<th>From </th>
+				<th>To </th>
 			</tr>
 			{% for schedule in schedules %}
 				<tr>
-					<td>{{schedule.start}}-{{schedule.end}}</td>
-					<td><button onclick ="">Appoint</button></td>
+					<td>{{schedule.start}}</td>
+					<td>{{schedule.end}}</td>
+					<td><a href="appoint/{{schedule.id}}"><button>Appoint</button></a></td>
 				</tr>
 			{% endfor %}
+		</table>
+	</div><br>
+	<div id = "apppointment_wrapper">
+		<h1>Upcomming Appointments</h1>
+		<table>
+			<tr>
+				<th>Subject</th>
+				<th>From</th>
+				<th>To</th>
+			</tr>
+			{% for appoint in appointments %}
+				{% if appoint.rejected == 2 %}
+				<tr>
+					<td>{{appoint.subject}}</td>
+					<td>{{appoint.start}}</td>
+					<td>{{appoint.end}}</td>
+					<td><a href="/cancel/{{appoint.id}}"><button onclick ="">Cancel</button></a></td>
+				</tr>
+				{% endif %}
+				{% if appoint.rejected == 0 %}
+				<tr>
+					<td>{{appoint.subject}}</td>
+					<td>{{appoint.start}}</td>
+					<td>{{appoint.end}}</td>
+					<td>PENDING</td>
+				</tr>
+				{% endif %}
+				{% if appoint.rejected == 1 %}
+				<tr>
+					<td>{{appoint.subject}}</td>
+					<td>{{appoint.start}}</td>
+					<td>{{appoint.end}}</td>
+					<td>REJECTED</td>
+				</tr>
+				{% endif %}
+			{% endfor%}
 		</table>
 	</div>
 	<script>
 		function popup(){
 			window.open("/acceptpopup.html", "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=200,left=500,width=400,height=400");
 		}
-	
 	</script>
 </body>
 </html>
