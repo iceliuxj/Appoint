@@ -37,8 +37,12 @@ def login(request):
         this_user = User.objects.get(email = request.POST['login_id'])
         request.session['user_id'] = this_user.id  # Save session ID on successful login, so that we can retrieve when needed # -shawn
         if this_user.admin == 0:
+            request.session['id']=this_user.id
+            request.session['username']=this_user.first_name
             return redirect('/userpage')  
         else:
+            request.session['id']=this_user.id
+            request.session['username']=this_user.first_name
             return redirect('/homepage')
 
 def homepage(request):
