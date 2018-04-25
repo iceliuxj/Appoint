@@ -56,6 +56,16 @@ body {
     margin: 5em 0em;
 }
 
+.wthree-pro {
+	background: rgb(255, 255, 255, 0.8);
+	width: 100%;
+	/* margin: 1em auto 0; */
+	padding: 2em 2em 4em 2em;
+	position: relative;
+	border: 1px solid #E7E4E4;
+	box-shadow: 6px 6px 3px rgb(206, 204, 204);
+}
+
 .wthree-pro h2 {
     font-size: 1.5em;
     color:#2ca5a5;
@@ -101,7 +111,7 @@ body {
     margin-top: 2em;
 }
 
-span.icon1, span.icon2 {
+/* span.icon1, span.icon2 {
     color:rgb(23, 36, 174);
     font-size: 1.1em;
 	position: absolute;
@@ -115,7 +125,7 @@ span.icon2 {
 }
 span.icon1, span.icon2{
 	left:2%;
-}
+} */
 
 .sub-main-w3 input[type="submit"] {
     color: white;

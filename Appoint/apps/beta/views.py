@@ -27,6 +27,17 @@ def register(request):
         request.session['username']=user.username
         return redirect("/homepage")
 
+def login(request):
+    errors = User.objects.login_validator(request.POST)
+    if len(errors):
+        for tag, message in errors.iteritems():
+            messages.error(request, message, tag)
+        return redirect('/')
+    else:
+        user = User.objects.get(email = request.POST['login_id'])
+        request.session['id'] = user.id  # Save session ID on successful login, so that we can retrieve when needed # -shawn
+        return redirect('/homepage')  
+
 def homepage(request):
     #user=User.objects.get(id=request.session['id'])
     # schedules=user.schedules.all()
@@ -43,17 +54,6 @@ def rejectpopup(request):
 
 def addschedule(request):
     return render(request,"beta/addschedule.html")
-
-def login(request):
-    errors = User.objects.login_validator(request.POST)
-    if len(errors):
-        for tag, message in errors.iteritems():
-            messages.error(request, message, tag)
-        return redirect('/')
-    else:
-        this_user = User.objects.get(email = request.POST['login_id'])
-        request.session['user_id'] = this_user.id  # Save session ID on successful login, so that we can retrieve when needed # -shawn
-        return redirect('/homepage')  
 
 def mainpage(request):
     return render(request, 'beta/mainpage.html')

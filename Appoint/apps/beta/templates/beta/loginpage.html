@@ -18,6 +18,18 @@
 	<!-- online-fonts -->
 	<link href="http://fonts.googleapis.com/css?family=Josefin+Sans:100,100i,300,300i,400,400i,600,600i,700,700i&amp;subset=latin-ext" rel="stylesheet">
 	<!-- //online-fonts -->
+
+	<style>
+	.wthree-pro {
+	background: rgb(255, 255, 255, 0.8);
+	width: 100%;
+	/* margin: 1em auto 0; */
+	padding: 2em 2em 4em 2em;
+	position: relative;
+	border: 1px solid #E7E4E4;
+	box-shadow: 6px 6px 3px rgb(206, 204, 204);
+  }
+	</style>
 </head>
 <body>
 	<!-- <div id = "logo">
@@ -34,7 +46,7 @@
 		<div class="sub-main-w3">	
 			<div class="wthree-pro">
 				<h2>Login Now</h2>
-			</div>
+			
 			<form action="/login/0" method="post">
 				{% csrf_token %} 
 				{% if messages %} 
@@ -55,6 +67,7 @@
 					</div>
 				</div>
 			</form>
+			</div>
 		</div>
 	</div>
 
