@@ -7,12 +7,18 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="#">
+    <form action="/homepage/addshedule" method="post">
+        {% csrf_token %}
         Start:
-        <input type="date"> <br>
+        <input type="datetime-local" name="start"> <br>
         End:  
-        <input type="date"> <br>
-        <input type="submit" value="add">
+        <input type="datetime-local" name="end"> <br>
+        <input type="submit" value="add" onclick="closewindow()">
     </form>
+    <script>
+    function closewindow(){
+        window.close();
+    }
+    </script>
 </body>
 </html>

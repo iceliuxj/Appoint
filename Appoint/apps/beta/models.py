@@ -50,15 +50,14 @@ class UserManager(models.Manager):
 			return errors
 
 class User(models.Model):
-
-    first_name = models.CharField(max_length=255)
-    last_name = models.CharField(max_length=255)
-    email = models.CharField(max_length=255)
-    password = models.CharField(max_length=255)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-    admin = models.IntegerField() # default 0, ADMIN = 1
-    objects = UserManager()
+	first_name = models.CharField(max_length=255)
+	last_name = models.CharField(max_length=255)
+	email = models.CharField(max_length=255)
+	password = models.CharField(max_length=255)
+	created_at = models.DateTimeField(auto_now_add =True)
+	updated_at = models.DateTimeField(auto_now = True)
+	admin = models.IntegerField() # default 0, admin = 1
+	objects = UserManager()
 
 class Profile(models.Model):
 	content = models.CharField(max_length=255)
@@ -68,10 +67,16 @@ class Profile(models.Model):
 
 class Appointment(models.Model):
 	subject = models.CharField(max_length=255)
+	location = models.CharField(max_length=255)
 	start = models.DateTimeField()
 	end = models.DateTimeField()
+<<<<<<< HEAD
 	user = models.ForeignKey(User, related_name = "appointments") # ONE TO MANY (USER & APPOINTMENTS)
 	rejected = models.IntegerField() # default by 0. REJECTED = 1, PENDING = 2 
+=======
+	users = models.ManyToManyField(User, related_name = "appointments") # MANY TO MANY (USERS & APPOINTMENTS)
+	rejected = models.IntegerField() # default by 0. REJECTED = 0
+>>>>>>> 4e73ecc9912b0dc383668f7e30c07b74a90e3950
 	created_at = models.DateTimeField(auto_now_add =True)
 	updated_at = models.DateTimeField(auto_now = True)
 
@@ -79,6 +84,10 @@ class Schedule(models.Model):
 	start = models.DateTimeField()
 	end = models.DateTimeField()
 	user = models.ForeignKey(User, related_name = "schedules") # ONE TO MANY (USER & SCHEDULES)
+<<<<<<< HEAD
+=======
+	#appointment = models.OneToOneField(Appointment, related_name="schedule") # ONE TO ONE (SCHEDULE & APPOINTMENTS)
+>>>>>>> 4e73ecc9912b0dc383668f7e30c07b74a90e3950
 	created_at = models.DateTimeField(auto_now_add =True)
 	updated_at = models.DateTimeField(auto_now = True)
 
@@ -87,5 +96,9 @@ class Message(models.Model):
 	user = models.ForeignKey(User,related_name ="messages") #ONE TO MANY (USER & MESSAGES)
 	appointment = models.ForeignKey(Appointment, related_name = "messages") # ONE TO MANY (APPOINTMENT & MESSAGES)
 	created_at = models.DateTimeField(auto_now_add =True)
+<<<<<<< HEAD
 	updated_at = models.DateTimeField(auto_now = True)
 
+=======
+	updated_at = models.DateTimeField(auto_now = True)
+>>>>>>> 4e73ecc9912b0dc383668f7e30c07b74a90e3950

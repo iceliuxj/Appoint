@@ -11,4 +11,5 @@ urlpatterns =[
     url(r'^acceptpopup.html$', views.acceptpopup),
     url(r'^rejectpopup.html$', views.rejectpopup),
     url(r'^addschedule.html$', views.addschedule),
+    url(r'^homepage/addshedule$', views.addschedules),
 ]
