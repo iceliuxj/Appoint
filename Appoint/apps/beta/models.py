@@ -79,7 +79,7 @@ class Schedule(models.Model):
 	start = models.DateTimeField()
 	end = models.DateTimeField()
 	user = models.ForeignKey(User, related_name = "schedules") # ONE TO MANY (USER & SCHEDULES)
-	appointment = models.OneToOneField(Appointment, related_name="schedule") # ONE TO ONE (SCHEDULE & APPOINTMENTS)
+	#appointment = models.OneToOneField(Appointment, related_name="schedule") # ONE TO ONE (SCHEDULE & APPOINTMENTS)
 	created_at = models.DateTimeField(auto_now_add =True)
 	updated_at = models.DateTimeField(auto_now = True)
 

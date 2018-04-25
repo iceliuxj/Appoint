@@ -5,51 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title></title>
-    <title></title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'beta/css/homepage.css' %}" media="screen" title="no title" charset="utf-8">
-    
 </head>
 <body>
+    
     <div class="container">
-    <h2>test</h2>
-
+    <h1>Welcom,{{request.session.first_name}}</h1>
     <div class="topone">
-            <h3>rejected appoinments:</h3> <br>
-            <h4>Jhon&nbsp;&nbsp;10:00-12:00am,March 1th,2019 Location</h4>
-            <p>descriptiondescriptiondescriptiondescriptiondescription</p>
-            <p class="red">rejectreasonrejectreasonrejectreason</p>
-    </div>
-    <div class="topone">
-        <h3>Appointments to deal with:</h3> <br>
-        <h4>xiaojing&nbsp;&nbsp;5:00-7:00pm,May 13th,2018 Location</h4>
-        <p>descriptiondescriptiondescriptiondescriptiondescription</p>
+        <h3>Unconfirmed appointments:</h3> <br>
+        {% for unconfirmedappo in unconfirmedappos %}
+        <p>{{unconfirmedappo.start}}--{{unconfirmedappo.end}}</p> 
+        <p>{{unconfirmedappo.subject}}</p> <br>
+        {% endfor %}
         <button onclick="acceptpopup()">accept</button>   <button onclick="rejectpopup()">reject</button>
-        <br>
-        <h4>Shawn&nbsp;&nbsp;9:00-11:00am,June 15th,2018 Location</h4>
-        <p>descriptiondescriptiondescriptiondescriptiondescription</p>
-        <button>accept</button>   <button>reject</button>
     </div>
 
     <div class="bottomone">
-        <h3>Accepted appoinments:</h3> <br>
-        <h4>Test&nbsp;&nbsp;10:00-12:00am,March 1th,2019 Location</h4>
-        <p>descriptiondescriptiondescriptiondescriptiondescription</p>
+        <h3>Confirmed appoinments:</h3> <br>
+        {% for confirmedappo in confirmedappos %}
+        <p>{{confirmedappo.start}}--{{confirmedappo.end}}</p> 
+        <p>{{confirmedappo.subject}}</p> <br>
+        {% endfor %}
     </div>
     
     <div class="bottomone">
         <h3>Schedules</h3> <br>
-        <p>5:00-7:00pm,May 13th,2018 </p>
-        <br>
-        <p>9:00-11:00am,June 15th,2018 </p>
-        <br>
-        <p>10:00-12:00am,March 1th,2019 </p>
+        {% for schedule in schedules %}
+        <p>{{schedule.start}}--{{schedule.end}}</p>
+        {%endfor%}
         <button class="add" onclick="addschedule()">Add Schedule</button>
     </div>
 </div>
     <script>
     function acceptpopup(){
-        window.open("/acceptpopup.html", "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=200,left=500,width=400,height=400");
+        window.open("/acceptpopup.html", "acceptwindow", "toolbar=yes,scrollbars=yes,resizable=yes,top=200,left=500,width=400,height=400");
     }
     function rejectpopup(){
         window.open("/rejectpopup.html", "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=200,left=500,width=400,height=400");

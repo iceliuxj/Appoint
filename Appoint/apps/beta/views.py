@@ -1,6 +1,6 @@
 from __future__ import unicode_literals
 from django.shortcuts import render,redirect
-from django.contrib import messages 
+from django.contrib import messages
 import bcrypt
 from .models import User, Profile, Appointment, Schedule, Message
 #####################################################################################################
@@ -24,7 +24,7 @@ def register(request):
             password = bcrypt.hashpw(request.POST['password'].encode(), bcrypt.gensalt()),
             admin = 0)
         request.session['id']=user.id
-        request.session['username']=user.username
+        request.session['firstname']=user.firstname
         return redirect("/homepage")
 
 def login(request):
@@ -36,15 +36,20 @@ def login(request):
     else:
         user = User.objects.get(email = request.POST['login_id'])
         request.session['id'] = user.id  # Save session ID on successful login, so that we can retrieve when needed # -shawn
-        return redirect('/homepage')  
+        request.session['first_name']=user.first_name
+        return redirect('/homepage')
 
 def homepage(request):
-    #user=User.objects.get(id=request.session['id'])
-    # schedules=user.schedules.all()
-    # context={
-    #     'schedules':schedules,
-    # }
-    return render(request,"beta/homepage.html")
+    schedules=Schedule.objects.all()
+    confirmedappos=Appointment.objects.filter(rejected=0)
+    unconfirmedappos=Appointment.objects.filter(rejected=2)
+    print confirmedappos
+    context={
+        'schedules':schedules,
+        'confirmedappos':confirmedappos,
+        'unconfirmedappos':unconfirmedappos,
+    }
+    return render(request,"beta/homepage.html",context)
 
 def acceptpopup(request):
     return render(request,"beta/acceptpopup.html")
@@ -53,7 +58,14 @@ def rejectpopup(request):
     return render(request,"beta/rejectpopup.html")
 
 def addschedule(request):
-    return render(request,"beta/addschedule.html")
+    return render(request,'beta/addschedule.html')
+
+def addschedules(request):
+    start=request.POST['start']
+    end=request.POST['end']
+    print start
+    Schedule.objects.create(start=start,end=end,user_id=request.session['id'])
+    return render(request,'beta/homepage.html')
 
 def mainpage(request):
     return render(request, 'beta/mainpage.html')
