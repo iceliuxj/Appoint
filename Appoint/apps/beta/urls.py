@@ -7,6 +7,7 @@ urlpatterns =[
     url(r'^register$', views.registerpage),
 	url(r'^register/0$', views.register),
     url(r'^homepage$', views.homepage),
+    url(r'^userpage$', views.userpage),
     url(r'^acceptpopup.html$', views.acceptpopup),
     url(r'^rejectpopup.html$', views.rejectpopup),
     url(r'^addschedule.html$', views.addschedule),

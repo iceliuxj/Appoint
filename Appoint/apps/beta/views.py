@@ -26,24 +26,7 @@ def register(request):
         )
         request.session['id']=user.id
         request.session['username']=user.username
-        return redirect("/homepage")
-
-def homepage(request):
-    #user=User.objects.get(id=request.session['id'])
-    # schedules=user.schedules.all()
-    # context={
-    #     'schedules':schedules,
-    # }
-    return render(request,"beta/homepage.html")
-
-def acceptpopup(request):
-    return render(request,"beta/acceptpopup.html")
-
-def rejectpopup(request):
-    return render(request,"beta/rejectpopup.html")
-
-def addschedule(request):
-    return render(request,"beta/addschedule.html")
+        return redirect("/userpage")
 
 def login(request):
     errors = User.objects.login_validator(request.POST)
@@ -54,10 +37,36 @@ def login(request):
     else:
         this_user = User.objects.get(email = request.POST['login_id'])
         request.session['user_id'] = this_user.id  # Save session ID on successful login, so that we can retrieve when needed # -shawn
-        return redirect('/homepage')  
+        if this_user.admin == 0:
+            return redirect('/userpage')  
+        else:
+            return redirect('/homepage')
 
-def mainpage(request):
-    return render(request, 'beta/mainpage.html')
+def homepage(request):
+    #user=User.objects.get(id=request.session['id'])
+    # schedules=user.schedules.all()
+    # context={
+    #     'schedules':schedules,
+    # }
+    return render(request,"beta/homepage.html")
+    
+def userpage(request):
+    schedules = Schedule.objects.all().order_by('start')
+    user = User.objects.get(id = request.session['user_id'])
+    context = {
+        'user': user,
+        'schedules': schedules
+    }
+    return render(request,"beta/userpage.html", context)
+
+def acceptpopup(request):
+    return render(request,"beta/acceptpopup.html")
+
+def rejectpopup(request):
+    return render(request,"beta/rejectpopup.html")
+
+def addschedule(request):
+    return render(request,"beta/addschedule.html")
 
 def appointmentpage(request,id):
     appointment = Appointment.objects.get(id = id)

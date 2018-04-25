@@ -71,7 +71,7 @@ class Appointment(models.Model):
 	start = models.DateTimeField()
 	end = models.DateTimeField()
 	user = models.ForeignKey(User, related_name = "appointments") # ONE TO MANY (USER & APPOINTMENTS)
-	rejected = models.IntegerField() # default by 0. REJECTED = 1
+	rejected = models.IntegerField() # default by 0. REJECTED = 1, PENDING = 2 
 	created_at = models.DateTimeField(auto_now_add =True)
 	updated_at = models.DateTimeField(auto_now = True)
 
@@ -79,7 +79,6 @@ class Schedule(models.Model):
 	start = models.DateTimeField()
 	end = models.DateTimeField()
 	user = models.ForeignKey(User, related_name = "schedules") # ONE TO MANY (USER & SCHEDULES)
-	appointment = models.OneToOneField(Appointment, related_name="schedule") # ONE TO ONE (SCHEDULE & APPOINTMENTS)
 	created_at = models.DateTimeField(auto_now_add =True)
 	updated_at = models.DateTimeField(auto_now = True)
 
@@ -88,9 +87,5 @@ class Message(models.Model):
 	user = models.ForeignKey(User,related_name ="messages") #ONE TO MANY (USER & MESSAGES)
 	appointment = models.ForeignKey(Appointment, related_name = "messages") # ONE TO MANY (APPOINTMENT & MESSAGES)
 	created_at = models.DateTimeField(auto_now_add =True)
-<<<<<<< HEAD
-	updated_at = models.DateTimeField(auto_now = True)
-=======
 	updated_at = models.DateTimeField(auto_now = True)
 
->>>>>>> aa8d623a7d2dea7951a8f8cbff09b28c5b0a41b1
