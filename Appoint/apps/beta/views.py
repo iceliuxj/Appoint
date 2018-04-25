@@ -24,7 +24,7 @@ def register(request):
             password = bcrypt.hashpw(request.POST['password'].encode(), bcrypt.gensalt()),
             admin = 0)
         request.session['id']=user.id
-        request.session['firstname']=user.firstname
+        request.session['first_name']=user.first_name
         return redirect("/homepage")
 
 def login(request):
