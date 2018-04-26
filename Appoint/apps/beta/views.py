@@ -35,7 +35,7 @@ def login(request):
         return redirect('/')
     else:
         this_user = User.objects.get(email = request.POST['login_id'])
-        request.session['user_id'] = this_user.id  # Save session ID on successful login, so that we can retrieve when needed # -shawn
+        # Save session ID on successful login, so that we can retrieve when needed # -shawn
         if this_user.admin == 0:
             request.session['id']=this_user.id
             request.session['username']=this_user.first_name
@@ -60,9 +60,15 @@ def homepage(request):
 def userpage(request):
     schedules = Schedule.objects.all().order_by('start')
     user = User.objects.get(id = request.session['id'])
+    appointments = Appointment.objects.filter(user_id = user.id).order_by('start')
+    count = appointments.count()
+    doctor = User.objects.filter(admin = 1).first()
     context = {
         'user': user,
-        'schedules': schedules
+        'schedules': schedules,
+        'appointments': appointments,
+        'count': count,
+        'doctor': doctor 
     }
     return render(request,"beta/userpage.html", context)
     
@@ -86,10 +92,24 @@ def mainpage(request):
     return render(request, 'beta/mainpage.html')
 
 def appointmentpage(request,id):
-    appointment = Appointment.objects.get(id = id)
-    user = appointment.user.all()
+    schedule = Schedule.objects.get(id=id)
     context = {
-        'appoint' : appointment,
-        'user' : user,
+       'schedule': schedule
     }
     return render(request,'beta/appointmentpage.html', context)
+
+def appoint(request,id):
+    schedule = Schedule.objects.get(id=id)
+    user = User.objects.get(id = request.session['id'])
+    subject = request.POST['subject']
+    Appointment.objects.create(subject = subject, start = schedule.start, end = schedule.end, user = user, rejected = 0)
+    schedule.delete()
+    return redirect('/userpage')
+
+def cancel(request,id):
+    appointment = Appointment.objects.get(id=id)
+    user = User.objects.get(admin = 1)
+    Schedule.objects.create(start = appointment.start, end = appointment.end, user = user)
+    appointment.delete()
+    return redirect('/userpage')    
+    

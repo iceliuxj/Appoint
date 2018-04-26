@@ -1,84 +1,101 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<link rel="stylesheet" href="../../static/beta/css/userpage/style.css" type="text/css"/>
+	<title>UserPage</title>
+	<link rel="stylesheet" href="../../static/beta/css/userpage/style.css">
 </head>
 
 <body>
+
 <div class='topbar'>
 	<h1>Welcome to ApPoints</h1>
+	<p>Hi, {{user.first_name}}</p>
 	<a href="loginpage.html">Logout</a>
 </div>
 
 <div class="content">
 	<div class="makeapp">
-		<h3>Make Appointment(Dr. Admin's schedule)</h3>
+		<h3>Make Appointment(Dr.{{doctor.first_name}}'s schedule)</h3>
+		<!-- <p>You have {{count}} appoints ahead</p> -->
 		<span> </span>
 
-		<table>
+		<table id="schedule">
 			<tr>
 				<th>From</th>
 				<th>To</th>
-				<th></th>
+				<th>Schedule</th>
 			</tr>
+
+			{% for schedule in schedules %}
 			<tr>
-				<td>date</td>
-				<td>date</td>
-				<td><Button>Appoint</Button></td>
+				<td>{{schedule.start}}</td>
+				<td>{{schedule.end}}</td>
+				<td><a href="appoint/{{schedule.id}}"><button>Appoint</button></a></td>
 			</tr>
+		{% endfor %}
 
 			<tr>
 					<td>date</td>
 					<td>date</td>
-					<td><Button>Appoint</Button></td>
+					<td><a href="appoint/{{schedule.id}"><Button>Appoint</Button></a></td>
 			</tr>
-
 			<tr>
 					<td>date</td>
 					<td>date</td>
 					<td><Button>Appoint</Button></td>
 			</tr>
 		</table>
-
-		
-
 	</div>
 
 	<div class="comingapp">
 		<h3>Upcoming Appointments</h3>
 		<span> </span>
 
-		<table>
+		<table id="confirm">
 			<tr>
 				<th>Subject</th>
 				<th>From</th>
 				<th>To</th>
 				<th>Status</th>
 			</tr>
-			<tr>
-				<td>date</td>
-				<td>date</td>
-				<td><Button>Appoint</Button></td>
-			</tr>
+			
+			{% for appoint in appointments %}
+				{% if appoint.rejected == 2 %}
+				<tr>
+					<td>{{appoint.subject}}</td>
+					<td>{{appoint.start}}</td>
+					<td>{{appoint.end}}</td>
+					<td><a href="/cancel/{{appoint.id}}"><button onclick ="">Cancel</button></a></td>
+				</tr>
+				{% endif %}
+				{% if appoint.rejected == 0 %}
+				<tr>
+					<td>{{appoint.subject}}</td>
+					<td>{{appoint.start}}</td>
+					<td>{{appoint.end}}</td>
+					<td><span id="pending">PENDING</span></td>
+				</tr>
+				{% endif %}
+				{% if appoint.rejected == 1 %}
+				<tr>
+					<td>{{appoint.subject}}</td>
+					<td>{{appoint.start}}</td>
+					<td>{{appoint.end}}</td>
+					<td><span id="reject">REJECTED</span></td>
+				</tr>
+				{% endif %}
+			{% endfor%}
 
-			<tr>
+				<tr>
+					<td>description</td>
 					<td>date</td>
 					<td>date</td>
-					<td><Button>Appoint</Button></td>
-			</tr>
-
-			<tr>
-					<td>date</td>
-					<td>date</td>
-					<td><Button>Appoint</Button></td>
-			</tr>
+					<td>reject</td>
+				</tr>
+			
 		</table>
 	
 	</div>
-
-
-</div>
+	
 </body>
-
 </html>
