@@ -50,14 +50,14 @@ class UserManager(models.Manager):
             return errors
 
 class User(models.Model):
-    first_name = models.CharField(max_length=255)
-    last_name = models.CharField(max_length=255)
-    email = models.CharField(max_length=255)
-    password = models.CharField(max_length=255)
-    created_at = models.DateTimeField(auto_now_add =True)
-    updated_at = models.DateTimeField(auto_now = True)
-    admin = models.IntegerField() # default 0, admin = 1
-git    objects = UserManager()
+   first_name = models.CharField(max_length=255)
+   last_name = models.CharField(max_length=255)
+   email = models.CharField(max_length=255)
+   password = models.CharField(max_length=255)
+   created_at = models.DateTimeField(auto_now_add=True)
+   updated_at = models.DateTimeField(auto_now=True)
+   admin = models.IntegerField() # default 0, ADMIN = 1
+   objects = UserManager()
 
 class Profile(models.Model):
     content = models.CharField(max_length=255)
@@ -66,13 +66,13 @@ class Profile(models.Model):
     updated_at = models.DateTimeField(auto_now = True)
 
 class Appointment(models.Model):
-	subject = models.CharField(max_length=255)
-	start = models.DateTimeField()
-	end = models.DateTimeField()
-	user = models.ForeignKey(User, related_name = "appointments") # ONE TO MANY (USER & APPOINTMENTS)
-	rejected = models.IntegerField() # default by 0. REJECTED = 1
-	created_at = models.DateTimeField(auto_now_add =True)
-	updated_at = models.DateTimeField(auto_now = True)
+    subject = models.CharField(max_length=255)
+    start = models.DateTimeField()
+    end = models.DateTimeField()
+    user = models.ForeignKey(User, related_name = "appointments") # ONE TO MANY (USER & APPOINTMENTS)
+    rejected = models.IntegerField() # default by 0. REJECTED = 1
+    created_at = models.DateTimeField(auto_now_add =True)
+    updated_at = models.DateTimeField(auto_now = True)
 
 class Schedule(models.Model):
     start = models.DateTimeField()

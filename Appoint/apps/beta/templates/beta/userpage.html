@@ -1,27 +1,84 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="../../static/beta/css/userpage/style.css" type="text/css"/>
 </head>
+
 <body>
-	<div id = "schedule_wrapper">
+<div class='topbar'>
+	<h1>Welcome to ApPoints</h1>
+	<a href="loginpage.html">Logout</a>
+</div>
+
+<div class="content">
+	<div class="makeapp">
+		<h3>Make Appointment(Dr. Admin's schedule)</h3>
+		<span> </span>
+
 		<table>
 			<tr>
-				<th><h1>Make Appointment</h1></th>
+				<th>From</th>
+				<th>To</th>
+				<th></th>
 			</tr>
-			{% for schedule in schedules %}
-				<tr>
-					<td>{{schedule.start}}-{{schedule.end}}</td>
-					<td><button onclick ="">Appoint</button></td>
-				</tr>
-			{% endfor %}
+			<tr>
+				<td>date</td>
+				<td>date</td>
+				<td><Button>Appoint</Button></td>
+			</tr>
+
+			<tr>
+					<td>date</td>
+					<td>date</td>
+					<td><Button>Appoint</Button></td>
+			</tr>
+
+			<tr>
+					<td>date</td>
+					<td>date</td>
+					<td><Button>Appoint</Button></td>
+			</tr>
 		</table>
+
+		
+
 	</div>
-	<script>
-		function popup(){
-			window.open("/acceptpopup.html", "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=200,left=500,width=400,height=400");
-		}
+
+	<div class="comingapp">
+		<h3>Upcoming Appointments</h3>
+		<span> </span>
+
+		<table>
+			<tr>
+				<th>Subject</th>
+				<th>From</th>
+				<th>To</th>
+				<th>Status</th>
+			</tr>
+			<tr>
+				<td>date</td>
+				<td>date</td>
+				<td><Button>Appoint</Button></td>
+			</tr>
+
+			<tr>
+					<td>date</td>
+					<td>date</td>
+					<td><Button>Appoint</Button></td>
+			</tr>
+
+			<tr>
+					<td>date</td>
+					<td>date</td>
+					<td><Button>Appoint</Button></td>
+			</tr>
+		</table>
 	
-	</script>
+	</div>
+
+
+</div>
 </body>
+
 </html>

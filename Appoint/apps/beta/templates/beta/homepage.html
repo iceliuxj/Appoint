@@ -11,7 +11,7 @@
 <body>
     
     <div class="container">
-    <h1>Welcom,{{request.session.first_name}}</h1>
+    <h1>Welcome,{{request.session.username}}</h1>
     <div class="topone">
         <h3>Unconfirmed appointments:</h3> <br>
         {% for unconfirmedappo in unconfirmedappos %}
