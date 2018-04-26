@@ -2,48 +2,63 @@
 <html>
 <head>
 	<title>UserPage</title>
-	<style>
-		*{
-			text-align: center;
-		}
-		#schedule_wrapper{
-			display: inline-block;
-			border: 1px solid black;
-		}
-		#apppointment_wrapper{
-			display: inline-block;
-			border: 1px solid black;
-		}
-	</style>
+	<link rel="stylesheet" href="../../static/beta/css/userpage/style.css">
 </head>
+
 <body>
-	<h1>Welcome, {{user.first_name}}</h1>
-	<p>You have {{count}} appoints ahead</p>
-	<div id = "schedule_wrapper">
-		<h1>Make Appointment</h1>
-		<p> Dr.{{doctor.first_name}}'s schedule</p>
-		<table>
+
+<div class='topbar'>
+	<h1>Welcome to ApPoints</h1>
+	<p>Hi, {{user.first_name}}</p>
+	<a href="loginpage.html">Logout</a>
+</div>
+
+<div class="content">
+	<div class="makeapp">
+		<h3>Make Appointment(Dr.{{doctor.first_name}}'s schedule)</h3>
+		<!-- <p>You have {{count}} appoints ahead</p> -->
+		<span> </span>
+
+		<table id="schedule">
 			<tr>
-				<th>From </th>
-				<th>To </th>
+				<th>From</th>
+				<th>To</th>
+				<th>Schedule</th>
 			</tr>
+
 			{% for schedule in schedules %}
-				<tr>
-					<td>{{schedule.start}}</td>
-					<td>{{schedule.end}}</td>
-					<td><a href="appoint/{{schedule.id}}"><button>Appoint</button></a></td>
-				</tr>
-			{% endfor %}
+			<tr>
+				<td>{{schedule.start}}</td>
+				<td>{{schedule.end}}</td>
+				<td><a href="appoint/{{schedule.id}}"><button>Appoint</button></a></td>
+			</tr>
+		{% endfor %}
+
+			<tr>
+					<td>date</td>
+					<td>date</td>
+					<td><a href="appoint/{{schedule.id}"><Button>Appoint</Button></a></td>
+			</tr>
+			<tr>
+					<td>date</td>
+					<td>date</td>
+					<td><Button>Appoint</Button></td>
+			</tr>
 		</table>
-	</div><br>
-	<div id = "apppointment_wrapper">
-		<h1>Upcomming Appointments</h1>
-		<table>
+	</div>
+
+	<div class="comingapp">
+		<h3>Upcoming Appointments</h3>
+		<span> </span>
+
+		<table id="confirm">
 			<tr>
 				<th>Subject</th>
 				<th>From</th>
 				<th>To</th>
+				<th>Status</th>
 			</tr>
+			
 			{% for appoint in appointments %}
 				{% if appoint.rejected == 2 %}
 				<tr>
@@ -58,7 +73,7 @@
 					<td>{{appoint.subject}}</td>
 					<td>{{appoint.start}}</td>
 					<td>{{appoint.end}}</td>
-					<td>PENDING</td>
+					<td><span id="pending">PENDING</span></td>
 				</tr>
 				{% endif %}
 				{% if appoint.rejected == 1 %}
@@ -66,16 +81,21 @@
 					<td>{{appoint.subject}}</td>
 					<td>{{appoint.start}}</td>
 					<td>{{appoint.end}}</td>
-					<td>REJECTED</td>
+					<td><span id="reject">REJECTED</span></td>
 				</tr>
 				{% endif %}
 			{% endfor%}
+
+				<tr>
+					<td>description</td>
+					<td>date</td>
+					<td>date</td>
+					<td>reject</td>
+				</tr>
+			
 		</table>
+	
 	</div>
-	<script>
-		function popup(){
-			window.open("/acceptpopup.html", "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=200,left=500,width=400,height=400");
-		}
-	</script>
+	
 </body>
 </html>

@@ -83,8 +83,9 @@ class Schedule(models.Model):
     updated_at = models.DateTimeField(auto_now = True)
 
 class Message(models.Model):
-    message = models.TextField(max_length= 1000)
-    user = models.ForeignKey(User,related_name ="messages") #ONE TO MANY (USER & MESSAGES)
-    appointment = models.ForeignKey(Appointment, related_name = "messages") # ONE TO MANY (APPOINTMENT & MESSAGES)
-    created_at = models.DateTimeField(auto_now_add =True)
-    updated_at = models.DateTimeField(auto_now = True)
+	message = models.TextField(max_length= 1000)
+	user = models.ForeignKey(User,related_name ="messages") #ONE TO MANY (USER & MESSAGES)
+	appointment = models.ForeignKey(Appointment, related_name = "messages") # ONE TO MANY (APPOINTMENT & MESSAGES)
+	created_at = models.DateTimeField(auto_now_add =True)
+	updated_at = models.DateTimeField(auto_now = True)
+

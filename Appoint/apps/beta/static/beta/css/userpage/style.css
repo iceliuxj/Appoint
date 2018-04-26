@@ -1,0 +1,133 @@
+* {
+	margin:0;
+	padding: 0;
+}
+
+body {
+	background-color:rgba(201, 196, 196, 0.6);
+	font-family: 'Open Sans', sans-serif;
+	color: rgb(87, 82, 82);
+}
+.topbar{
+	width: 100%;
+	height: 50px;
+	background-color:#37a8a8;
+}
+
+.topbar h1 {
+	color:white;
+	display: inline-block;
+	margin-left:10px;
+	margin-top:5px;
+	
+}
+.topbar p {
+	color:white;
+	font-size:16px;
+	display: inline-block;
+	margin-left: 800px;
+
+}
+.topbar a{
+	text-decoration: none;
+	color:white;
+	font-size:16px;
+	display: inline-block;
+	margin-left: 40px;
+}
+.content {
+	text-align: center;
+	margin-top:20px;
+}
+.makeapp {
+	width: 30%;
+	height: 500px;
+	background-color: white;
+	border-radius: 5px;
+	box-shadow: 6px 6px 5px rgb(138, 137, 137);
+	display: inline-block;
+	vertical-align: top;
+	margin:20px;
+	padding: 20px;
+}
+
+.comingapp {
+	width: 30%;
+	height: 500px;
+	background-color: white;
+	border-radius: 5px;
+	box-shadow: 6px 6px 5px rgb(138, 137, 137);
+	display: inline-block;
+	vertical-align: top;
+	margin:20px;
+	padding: 20px;
+}
+
+.makeapp h3{
+	font-size: 20px;
+	color:#37a8a8;
+}
+
+.makeapp span{
+	margin-top:10px;
+	display: block;
+	width:100%;
+	height:1px;
+	background-color:rgb(187, 180, 180);
+}
+
+#schedule th,td {
+	border-bottom:1px solid rgb(187, 180, 180);
+	padding:10px 45px;
+}
+
+.makeapp table button {
+	background-color:#23b35f;
+	border-radius: 5px;
+	padding: 10px 10px;
+	text-align: center;
+	border:none;
+	color:white;
+	font-weight: 500;
+	text-decoration: none;
+}
+
+.comingapp h3{
+	font-size: 20px;
+	color:#37a8a8;
+}
+
+.comingapp span{
+	margin-top:10px;
+	display: block;
+	width:100%;
+	height:1px;
+	background-color:rgb(187, 180, 180);
+}
+
+#confirm th,td {
+	border-bottom:1px solid rgb(187, 180, 180);
+	padding:10px 25px;
+}
+
+.comingapp table button {
+	background-color:#37a8a8;
+	border-radius: 5px;
+	padding: 10px 10px;
+	text-align: center;
+	border:none;
+	color:white;
+	font-weight: 500;
+	text-decoration: none;
+}
+
+
+#pending {
+	color: rgb(13, 157, 13);
+}
+
+#reject {
+	color: rgb(228, 75, 20);
+}
+
+
